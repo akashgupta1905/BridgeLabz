@@ -1,0 +1,73 @@
+# -------------------------
+# Dependencies
+# -------------------------
+node_modules/
+bower_components/
+
+# -------------------------
+# Environment variables
+# -------------------------
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# -------------------------
+# Logs
+# -------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -------------------------
+# Runtime data
+# -------------------------
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# -------------------------
+# Coverage & reports
+# -------------------------
+coverage/
+.nyc_output/
+
+# -------------------------
+# Build output
+# -------------------------
+dist/
+build/
+
+# -------------------------
+# Cache
+# -------------------------
+.cache/
+.eslintcache
+
+# -------------------------
+# IDE / Editor files
+# -------------------------
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# -------------------------
+# OS files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Optional: Lock files (uncomment if required)
+# -------------------------
+# package-lock.json
+# yarn.
+
