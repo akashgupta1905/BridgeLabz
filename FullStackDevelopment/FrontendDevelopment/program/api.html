@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Management System</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      .card {
+        border: 1px solid #ddd;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+      }
+      button {
+        padding: 6px 12px;
+        margin-top: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎓 Student Management System</h1>
+    <p>A scenario-based project using Fetch API + JSON Server</p>
+
+    <h2>Add New Student</h2>
+    <input type="text" id="name" placeholder="Enter name" />
+    <input type="number" id="score" placeholder="Enter score" />
+    <button onclick="addStudent()">Add Student</button>
+
+    <hr />
+
+    <h2>All Students</h2>
+    <div id="output"></div>
+
+    <script>
+      const BASE_URL = "http://localhost:3000/students";
+
+      // LOAD ALL STUDENTS
+      function loadStudents() {
+        fetch(BASE_URL)
+          .then((res) => res.json())
+          .then((data) => {
+            let html = "";
+            data.forEach((st) => {
+              html += `
+                    <div class="card">
+                        <h3>${st.name}</h3>
+                        <p>Score: ${st.score}</p>
+                        <button onclick="deleteStudent(${st.id})">Delete</button>
+                    </div>
+                `;
+            });
+            document.getElementById("output").innerHTML = html;
+          });
+      }
+
+      // ADD STUDENT
+      function addStudent() {
+        const name = document.getElementById("name").value;
+        const score = document.getElementById("score").value;
+
+        if (!name || !score) {
+          alert("Please enter both name and score.");
+          return;
+        }
+
+        fetch(BASE_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, score }),
+        }).then(() => {
+          document.getElementById("name").value = "";
+          document.getElementById("score").value = "";
+          loadStudents();
+        });
+      }
+
+      // DELETE STUDENT
+      function deleteStudent(id) {
+        fetch(`${BASE_URL}/${id}`, { method: "DELETE" }).then(() =>
+          loadStudents()
+        );
+      }
+
+      loadStudents();
+    </script>
+  </body>
+</html>
